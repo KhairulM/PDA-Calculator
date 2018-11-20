@@ -10,6 +10,7 @@ int main(){
 
     /*****ALGORITMA*****/
     /*BACA STRING INPUT*/
+    printf("Masukkan Token : \n");
     scanf("%s", Input);
 
     /*Tes Kevalidan Input, apakah ekspresi matematiknya benar*/

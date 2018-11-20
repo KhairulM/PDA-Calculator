@@ -76,7 +76,7 @@ boolean IsBase(infotype X){
 void Verifikasi(char Input[MAX_STRLEN], boolean *IsValid){
     STACK Verif;
     infotype X, Y;
-
+    int NbKoma=0;
 
     CreateEmpty(&Verif);
     Push(&Verif, Base);
@@ -88,6 +88,7 @@ void Verifikasi(char Input[MAX_STRLEN], boolean *IsValid){
     if (strlen(Input)!=0){
         for (int i=0;Input[i]!='\0' && *IsValid;i++){
             if (IsOperator(Input[i])){
+                NbKoma=0;
                 if (IsOperator(InfoTop(Verif))){
                     *IsValid=false;
                 }else if (IsNumber(InfoTop(Verif))){
@@ -120,6 +121,7 @@ void Verifikasi(char Input[MAX_STRLEN], boolean *IsValid){
                 }
 
             }else if(IsParanthesis(Input[i])){
+                NbKoma=0;
                 if (Input[i]=='('){
                     if (IsOperator(InfoTop(Verif))){
                         Pop(&Verif, &X);
@@ -151,7 +153,11 @@ void Verifikasi(char Input[MAX_STRLEN], boolean *IsValid){
                     }
                 }
             }else if(IsKoma(Input[i])){
-                if (IsOperator(InfoTop(Verif))){
+                NbKoma++;
+
+                if (NbKoma>1){
+                    *IsValid=false;
+                }else if (IsOperator(InfoTop(Verif))){
                     *IsValid=false;
                 }else if (IsBase(InfoTop(Verif))){
                     *IsValid=false;
